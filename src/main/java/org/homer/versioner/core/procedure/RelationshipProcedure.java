@@ -71,7 +71,7 @@ public class RelationshipProcedure extends CoreProcedure {
 
         if (sourceCurrentState.isPresent() && destinationRNode.isPresent()) {
             updateProcedure.update(entitySource, sourceCurrentState.get().getAllProperties(), "", null);
-            getCurrentRelationship(entitySource).ifPresent(rel -> rel.getEndNode().getRelationships(RelationshipType.withName(type), Direction.OUTGOING).forEach(Relationship::delete));
+            getCurrentRelationship(entitySource).ifPresent(rel -> rel.getEndNode().getRelationships(Direction.OUTGOING, RelationshipType.withName(type)).forEach(Relationship::delete));
             return Stream.of(new BooleanOutput(Boolean.TRUE));
         } else {
             return Stream.of(new BooleanOutput(Boolean.FALSE));

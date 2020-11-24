@@ -51,7 +51,7 @@ public class Get {
 
         PathImpl.Builder builder = new PathImpl.Builder(entity)
                 .push(entity.getSingleRelationship(RelationshipType.withName(Utility.CURRENT_TYPE), Direction.OUTGOING));
-        builder = StreamSupport.stream(entity.getRelationships(RelationshipType.withName(Utility.HAS_STATE_TYPE), Direction.OUTGOING).spliterator(), false)
+        builder = StreamSupport.stream(entity.getRelationships(Direction.OUTGOING, RelationshipType.withName(Utility.HAS_STATE_TYPE)).spliterator(), false)
                 //.sorted((a, b) -> -1 * Long.compare((long)a.getProperty(START_DATE_PROP), (long)b.getProperty(START_DATE_PROP)))
                 .reduce(
                         builder,
@@ -68,7 +68,7 @@ public class Get {
             @Name("entity") Node entity,
             @Name("label") String label) {
 
-        return StreamSupport.stream(entity.getRelationships(RelationshipType.withName(Utility.HAS_STATE_TYPE), Direction.OUTGOING).spliterator(), false)
+        return StreamSupport.stream(entity.getRelationships(Direction.OUTGOING, RelationshipType.withName(Utility.HAS_STATE_TYPE)).spliterator(), false)
                 .map(Relationship::getEndNode)
                 .filter(node -> node.hasLabel(Label.label(label)))
                 .map(NodeOutput::new);
@@ -80,7 +80,7 @@ public class Get {
             @Name("entity") Node entity,
             @Name("date") LocalDateTime date) {
 
-        return StreamSupport.stream(entity.getRelationships(RelationshipType.withName(Utility.HAS_STATE_TYPE), Direction.OUTGOING).spliterator(), false)
+        return StreamSupport.stream(entity.getRelationships(Direction.OUTGOING, RelationshipType.withName(Utility.HAS_STATE_TYPE)).spliterator(), false)
                 .filter(relationship -> relationship.getProperty(Utility.START_DATE_PROP).equals(date))
                 .map(Relationship::getEndNode)
                 .map(NodeOutput::new);
@@ -109,7 +109,7 @@ public class Get {
 
 	private Optional<Node> jumpToPreviousState(Node state) {
 
-    	return StreamSupport.stream(state.getRelationships(RelationshipType.withName(Utility.PREVIOUS_TYPE), Direction.OUTGOING).spliterator(), false)
+    	return StreamSupport.stream(state.getRelationships(Direction.OUTGOING, RelationshipType.withName(Utility.PREVIOUS_TYPE)).spliterator(), false)
 				.findFirst()
 				.map(Relationship::getEndNode);
 	}
