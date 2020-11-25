@@ -29,7 +29,7 @@ public class RelationshipProcedureTest extends GenericProcedureTest {
     /*            relationship.create            */
     /*-------------------------------------------*/
 
-    //@Test
+    @Test
     public void shouldCreateTheRelationshipAndTheNewCurrentStateBetweenEntities() throws Throwable {
 
         try (Driver driver = GraphDatabase
@@ -55,7 +55,7 @@ public class RelationshipProcedureTest extends GenericProcedureTest {
         }
     }
 
-    //@Test
+    @Test
     public void shouldNotCreateTheRelationshipIfSourceIsNotAnEntity() throws Throwable {
 
         try (Driver driver = GraphDatabase
@@ -76,7 +76,7 @@ public class RelationshipProcedureTest extends GenericProcedureTest {
         }
     }
 
-    //@Test
+    @Test
     public void shouldNotCreateTheRelationshipIfDestinationIsNotAnEntity() throws Throwable {
 
         try (Driver driver = GraphDatabase
@@ -97,7 +97,7 @@ public class RelationshipProcedureTest extends GenericProcedureTest {
         }
     }
 
-    //@Test
+    @Test
     public void shouldCreateTheRelationshipAssociatedToANewStateHavingRequestedDate() {
 
         try (Driver driver = GraphDatabase
@@ -122,7 +122,7 @@ public class RelationshipProcedureTest extends GenericProcedureTest {
         }
     }
 
-    //@Test
+    @Test
     public void shouldCreateTheRelationshipInANewCurrentStatePreservingTheOldOne() {
 
         try (Driver driver = GraphDatabase
@@ -148,7 +148,7 @@ public class RelationshipProcedureTest extends GenericProcedureTest {
         }
     }
 
-    //@Test
+    @Test
     public void shouldCreateTwoRelationshipsInTwoDifferentStates() {
 
         try (Driver driver = GraphDatabase
